@@ -8,16 +8,20 @@ import {
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private loginService: LoginService) { }
+    constructor(private rota: Router, private loginService: LoginService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
-        console.log('auth.gaurd: ' + url);
+        
+        console.log('auth.gaurd');
+        console.log('De: ' + this.rota.url);
+        console.log('Para: ' + state.url);
+        
         if(this.checkLogin(url)){
             return true;
         }
 
-        this.router.navigate(['/login']);
+        this.rota.navigate(['/login']);
         return false;
     }
 
