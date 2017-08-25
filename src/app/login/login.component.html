@@ -1,1 +1,87 @@
-<h5>Login</h5>
+<div class="row login">
+
+  <!-- Centralizar card -->
+  <div class="col s0 m1 l1 xl1"></div>
+
+  <!-- Card -->
+  <div class="card col s12 m10 l10 xl10">
+    <div class="col s4 m4 l4 xl4"> </div>
+    <div class="col s4 m4 l4 xl4">
+      <h3>Login</h3>
+    </div>
+    <div class="col s4 m4 l4 xl4"></div>
+    <!--div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://lorempixel.com/output/technics-q-c-640-480-3.jpg">
+        </div-->
+    <div class="card-content">
+
+      <form [formGroup]="formulario" (ngSubmit)="onFormSubmit()">
+        <!-- Nome -->
+        <div class="row">
+          <div class="input-field col s12 m12 l12 xl12">
+            <i class="fa fa-user fa-3x prefix" aria-hidden="true"></i>
+            <input id="icon_prefix" type="text" formControlName="nome">
+            <label for="icon_prefix">Nome</label>
+          </div>
+        </div>
+
+        <!-- Erros do nome -->
+        <div class="row campoErros" *ngIf="trataErroRequired('nome') || trataErroMinLenght('nome')">
+          <div class="col s1 m1 l1 xl1"></div>
+          <div class="col s11 m11 l11 xl11" *ngIf="trataErroRequired('nome')">
+            <p class="erroRequired">Nome Obrigatório</p>
+          </div>
+          <div class="col s11 m11 l11 xl11" *ngIf="trataErroMinLenght('nome')">
+            <p class="erroRequired">Nome deve ter 4 dígitos</p>
+          </div>
+        </div>
+
+        <!-- senha -->
+        <div class="row">
+          <div class="input-field col s12 m12 l12 xl12">
+            <i class="fa fa-unlock-alt fa-3x prefix" aria-hidden="true"></i>
+            <input id="icon_prefix" type="password" formControlName="senha">
+            <label for="icon_prefix">Senha</label>
+          </div>
+        </div>
+
+        <!--loginFail Erros do senha -->
+        <div class="row campoErros" *ngIf="trataErroRequired('senha') || loginFail">
+          <div class="col s1 m1 l1 xl1"></div>
+          <div class="col s4 m4 l4 xl4" *ngIf="trataErroRequired('senha')">
+            <p class="erroRequired">Senha Obrigatória</p>
+          </div>
+          <div class="col s7 m7 l7 xl7" *ngIf="loginFail">
+            <p class="erroRequired">Credenciais inválidas</p>
+          </div>
+        </div>
+
+        <!-- Botão -->
+        <div class="row">
+          <div class="col s3 m4 l4 s4"></div>
+
+          <div class="col s6 m4 l4 s4">
+            <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!formulario.valid">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+          </div>
+
+          <div class="col s3 m4 l4 s4"></div>
+
+        </div>
+
+        <!-- link para login -->
+        <div class="row"></div>
+        <div class="row">
+          <a routerLink="/cadastrar">Não tem conta? então cadastre.</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Centralizar card -->
+  <div class="col s0 m1 l1 xl1"></div>
+
+</div>

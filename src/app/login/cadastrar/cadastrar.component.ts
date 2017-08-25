@@ -11,6 +11,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractC
 export class CadastrarComponent implements OnInit {
 
     private formulario: FormGroup;
+    private nomeExiste: boolean = false;
 
     constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
 
@@ -50,7 +51,13 @@ export class CadastrarComponent implements OnInit {
             usuario.nome = this.formulario.value.nome;
             usuario.email = this.formulario.value.email;
             usuario.senha = this.formulario.value.senha;
-            this.loginService.cadastraUsuario(usuario);
+            this.loginService.cadastraUsuario(usuario).then(dados => {
+                console.log("cadastrarComponente: ");
+                if(dados == false)
+                    this.nomeExiste = true;
+                else
+                    this.nomeExiste = false;
+            });
         }
         else{
             alert('Formulário inválido');

@@ -5,6 +5,11 @@
 
   <!-- Card -->
   <div class="card col s12 m10 l10 xl10">
+      <div class="col s4 m4 l4 xl4"> </div>
+      <div class="col s4 m4 l4 xl4">
+         <h3>Cadastrar</h3>
+      </div>
+      <div class="col s4 m4 l4 xl4"></div>
     <!--div class="card-image waves-effect waves-block waves-light">
       <img class="activator" src="http://lorempixel.com/output/technics-q-c-640-480-3.jpg">
     </div-->
@@ -21,13 +26,16 @@
         </div>
 
         <!-- Erros do nome -->
-        <div class="row campoErros" *ngIf="trataErroRequired('nome') || trataErroMinLenght('nome')">
+        <div class="row campoErros" *ngIf="trataErroRequired('nome') || trataErroMinLenght('nome') || nomeExiste">
           <div class="col s1 m1 l1 xl1"></div>
           <div class="col s11 m11 l11 xl11" *ngIf="trataErroRequired('nome')">
             <p class="erroRequired">Nome Obrigatório</p>
           </div>
           <div class="col s11 m11 l11 xl11" *ngIf="trataErroMinLenght('nome')">
             <p class="erroRequired">Nome deve ter 4 dígitos</p>
+          </div>
+          <div class="col s11 m11 l11 xl11" *ngIf="nomeExiste">
+            <p class="erroRequired">Nome já existe, tente outro!</p>
           </div>
         </div>
 
@@ -86,10 +94,10 @@
           <a routerLink="/login">Já tem conta? então faça login.</a>
         </div>
 
-        <div class="row">
+        <!--div class="row">
           <p>Values: {{ formulario.value | json }}</p>
           <p>Valid: {{ formulario.valid }}</p>
-        </div>
+        </div-->
 
       </form>
 
