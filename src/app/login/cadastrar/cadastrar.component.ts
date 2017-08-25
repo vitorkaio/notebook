@@ -10,8 +10,8 @@ import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractC
 })
 export class CadastrarComponent implements OnInit {
 
-    private formulario: FormGroup;
-    private nomeExiste: boolean = false;
+    public formulario: FormGroup;
+    public nomeExiste: boolean = false;
 
     constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
 

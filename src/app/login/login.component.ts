@@ -10,8 +10,8 @@ import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractC
 })
 export class LoginComponent implements OnInit {
 
-    private formulario: FormGroup;
-    private loginFail: boolean = false;
+    public formulario: FormGroup;
+    public loginFail: boolean = false;
 
     constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
 
