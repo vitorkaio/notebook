@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
     public formulario: FormGroup;
     public loginFail: boolean = false;
+    public display: boolean = false;
 
     constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     }
 
     // ************************************ Trata erros do form ************************************
-    
+
     // Verifica o erro relaciona ao required.
     public trataErroRequired(campo: any): boolean{
         if(this.formulario.get(campo).errors != null)
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     // ************************************ Submit ************************************
-    public onFormSubmit() { 
+    public onFormSubmit() {
         console.log(this.formulario);
         if(this.formulario.valid){
             let usuario: IUsuario = {};
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
 
             this.loginService.doLogin(usuario.nome, usuario.senha).then(dados => {
                 console.log(dados);
+                this.display = false;
                 dados ? this.loginFail = false : this.loginFail = true;
             });
         }
@@ -59,5 +61,9 @@ export class LoginComponent implements OnInit {
             alert('Formulário inválido');
         }
     }
+
+        showDialog() {
+            this.display = true;
+        }
 
 }
