@@ -32,7 +32,7 @@ export const firebaseConfig = {
     NotesModule,
     AppRoutingModule,
   ],
-  providers: [AuthService,  AngularFireAuth],
+  providers: [AuthService, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

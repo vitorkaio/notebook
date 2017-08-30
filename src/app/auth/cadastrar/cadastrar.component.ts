@@ -36,6 +36,8 @@ export class CadastrarComponent implements OnInit {
 
     this.display = true;
 
+      setTimeout(function(){}, 6000);
+
     if(this.formulario.valid){
       let usuario: IUsuario = {};
       usuario.email = this.formulario.value.email;

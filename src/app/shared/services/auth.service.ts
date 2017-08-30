@@ -1,6 +1,6 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { IUsuario } from '../models/usuario';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth} from 'angularfire2/auth';
 
 @Injectable()
 export class AuthService {

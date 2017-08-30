@@ -6,7 +6,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 const LOGIN_ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'cadastrar', component: CadastrarComponent },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'cadastrar', pathMatch: 'full' },
 ];
 
 @NgModule({
