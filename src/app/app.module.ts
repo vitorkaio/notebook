@@ -1,3 +1,4 @@
+import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { AppRoutingModule } from './app.routing.module';
 import { NotesModule } from './notes/notes.module';
@@ -32,7 +33,7 @@ export const firebaseConfig = {
     NotesModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AngularFireAuth],
+  providers: [AuthService, AngularFireAuth, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

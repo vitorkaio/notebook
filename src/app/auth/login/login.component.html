@@ -1,3 +1,91 @@
-<p>
-  login works!
-</p>
+<div class="row myCard">
+  <div class="col s12 m12 l12 xl12">
+    <div class="card hoverable grey lighten-5">
+      <br>
+      <div class="cardImage">
+        <img src="assets/img/auth/verification.png">
+      </div>
+      <div class="card-content">
+        <form [formGroup]="formulario" (ngSubmit)="login()">
+
+          <!-- Email -->
+          <div class="row">
+            <div class="input-field col s12 m12 l12 xl12">
+              <i class="fa fa-envelope fa-3x prefix" aria-hidden="true"></i>
+              <input id="icon_prefix" type="text" formControlName="email" (focus)="limpaErroCredencial()">
+              <label for="icon_prefix">Email</label>
+            </div>
+          </div>
+
+          <!-- Erros do email -->
+          <div class="row erros" *ngIf="verificaEmail('email')">
+            <div class="col s1 m1 l1 xl1"></div>
+            <div class="col s11 m11 l11 xl11" *ngIf="verificaEmail('email')">
+              <p>Email inválido</p>
+            </div>
+          </div>
+
+          <!-- senha -->
+          <div class="row">
+            <div class="input-field col s12 m12 l12 xl12">
+              <i class="fa fa-unlock-alt fa-3x prefix" aria-hidden="true"></i>
+              <input id="icon_prefix" type="password" formControlName="senha" (focus)="limpaErroCredencial()">
+              <label for="icon_prefix">Senha</label>
+            </div>
+          </div>
+
+          <!-- Erros da senha -->
+          <div class="row erros" *ngIf="verificaRequired('senha') || minSenhaRequired('senha') || userExist">
+            <div class="col s1 m1 l1 xl1"></div>
+            <div class="col s11 m11 l11 xl11" *ngIf="verificaRequired('senha')">
+              <p>Senha é obrigatória</p>
+            </div>
+            <div class="col s11 m11 l11 xl11" *ngIf="minSenhaRequired('senha')">
+              <p>Senha tem que possui 6 dígitos</p>
+            </div>
+            <div class="col s11 m11 l11 xl11" *ngIf="userExist">
+              <p>Credenciais inválida</p>
+            </div>
+          </div>
+
+          <!-- Botão -->
+          <div class="row">
+            <div class="col s3 m4 l4 s4"></div>
+
+            <div class="col s6 m4 l4 s4">
+              <button class="btn waves-effect waves-light light-blue accent-4" type="submit" name="action" [disabled]="!formulario.valid"
+              >Login
+                  <i class="material-icons right">send</i>
+              </button>
+            </div>
+
+            <div class="col s3 m4 l4 s4"></div>
+
+          </div>
+
+        </form>
+        <div class="card-action">
+          <div class="row">
+            <a href="" routerLink="/cadastrar" class="blue-text">
+              Faça o seu <a href=""> cadastro </a>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Verificando credenciais..." [(visible)]="display" modal="modal" width="300" [responsive]="true">
+    <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+</p-dialog>
