@@ -19,6 +19,7 @@ export class CadastrarComponent implements OnInit {
 
   public formulario: FormGroup;
   public userExist: boolean = false;
+  public display: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
 
@@ -32,6 +33,8 @@ export class CadastrarComponent implements OnInit {
   // Cadastra usuário no sistema.
   public cadastrar(){
     //console.log(this.formulario);
+
+    this.display = true;
 
     if(this.formulario.valid){
       let usuario: IUsuario = {};
@@ -56,6 +59,9 @@ export class CadastrarComponent implements OnInit {
           this.formulario.reset();
           this.userExist = false;
         }
+
+      this.display = false;
+
 
       }).catch(er => {
         console.log('cadastrar-componente')

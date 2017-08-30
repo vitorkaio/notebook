@@ -19,7 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.sass"
+        "styles.sass",
+        "../node_modules/primeng/resources/primeng.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css"
       ],
       "scripts": ["../node_modules/jquery/dist/jquery.js",
                   "../node_modules/hammerjs/hammer.js",
