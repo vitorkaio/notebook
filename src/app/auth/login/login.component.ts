@@ -10,6 +10,8 @@ import {
   AbstractControl
 } from "@angular/forms";
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
   public userExist: boolean = false;
   public display: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private rota: Router) {}
 
   public ngOnInit() {
     this.formulario = this.formBuilder.group({
@@ -59,6 +61,7 @@ export class LoginComponent implements OnInit {
             else{
               this.formulario.reset();
               this.userExist = false;
+              this.rota.navigate(['/notes']);
             }
 
           this.display = false;

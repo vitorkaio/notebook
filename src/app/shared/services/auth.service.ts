@@ -58,6 +58,7 @@ export class AuthService {
   public isLogged(){
     return new Promise(res => {
       this.af.auth.onAuthStateChanged(state => {
+        console.log(state);
         res(state);
        });
     });

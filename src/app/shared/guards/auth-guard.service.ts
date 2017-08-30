@@ -11,30 +11,39 @@ import {
 export class AuthGuardService implements CanActivate {
   constructor(private rota: Router, private authService: AuthService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
     console.log("auth.gaurd");
     console.log("De: " + this.rota.url);
     console.log("Para: " + state.url);
 
-    if (this.checkLogin(url) != null) {
-      console.log("notes");
-      return true;
-    }
+    return new Promise(resolve => {
 
-    console.log('not user logged');
-    this.rota.navigate(["/login"]);
-    return false;
+      this.checkLogin(url).then(res => {
+        if(res != null){
+          console.log("notes");
+          resolve(true);
+          return true;
+        }
+        console.log('not user logged');
+        this.rota.navigate(["/login"]);
+        resolve(false);
+        return false;
+      });
+
+    });
+
   }
 
   // Arrumar Isso aqui.
   public checkLogin(url: string) {
-    this.authService.isLogged().then(resolve => {
-      console.log(resolve);
-      return resolve;
+    return new Promise(resolve => {
+      const promise = this.authService.isLogged();
+      promise.then(res => {
+        resolve(res);
+      });
     });
-
   }
 
 }// Fim do authguard

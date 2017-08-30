@@ -10,6 +10,8 @@ import {
   AbstractControl
 } from "@angular/forms";
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: "app-cadastrar",
   templateUrl: "./cadastrar.component.html",
@@ -21,7 +23,7 @@ export class CadastrarComponent implements OnInit {
   public userExist: boolean = false;
   public display: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private rota: Router) {}
 
   public ngOnInit() {
     this.formulario = this.formBuilder.group({
@@ -60,6 +62,7 @@ export class CadastrarComponent implements OnInit {
         else{
           this.formulario.reset();
           this.userExist = false;
+          this.rota.navigate(['/notes']);
         }
 
       this.display = false;
