@@ -1,3 +1,5 @@
+import { IUsuario } from '../../shared/models/usuario';
+import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit } from "@angular/core";
 import {
   FormControl,
@@ -14,21 +16,56 @@ import {
   styleUrls: ["./cadastrar.component.sass"]
 })
 export class CadastrarComponent implements OnInit {
-  public formulario: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  public formulario: FormGroup;
+  public userExist: boolean = false;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
 
   public ngOnInit() {
     this.formulario = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      senha: [null, [Validators.required, Validators.minLength(4)]]
+      senha: [null, [Validators.required, Validators.minLength(6)]]
     });
   }
 
   // Cadastra usuário no sistema.
   public cadastrar(){
+    //console.log(this.formulario);
 
-  }
+    if(this.formulario.valid){
+      let usuario: IUsuario = {};
+      usuario.email = this.formulario.value.email;
+      usuario.senha = this.formulario.value.senha;
+
+      const promise = this.authService.cadastarUsuario(usuario)
+
+      promise.then(res => {
+        console.log('cadastrar-componente')
+        console.log(res);
+
+        // Verifica se o email já existe no sistema.
+        if(res['code']){
+          if(res['code'] == 'auth/email-already-in-use'){
+            this.userExist = true;
+          }
+
+        }
+
+        else{
+          this.formulario.reset();
+          this.userExist = false;
+        }
+
+      }).catch(er => {
+        console.log('cadastrar-componente')
+        console.log(er);
+      });
+
+
+    }
+
+  }// Fim do cadastrar
 
   // ************************************ Trata erros do form ************************************
 
