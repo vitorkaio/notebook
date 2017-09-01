@@ -1,0 +1,16 @@
+<nav class=" blue darken-3">
+  <div class="nav-wrapper">
+    <a routerLink="/notes" class="brand-logo right"><img src="assets/img/icon/notebook32.png"></a>
+    <ul class="left">
+      <li><a class="dropdown-button" materialize="dropdown" data-activates="dropdown1"><i class="material-icons">menu</i><i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a>{{ user }}</a></li>
+    </ul>
+  </div>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li routerLinkActive="active"><a (click)="logout()">logout</a></li>
+    <li><a>Outros</a></li>
+  </ul>
+
+</nav>
+<div class="row"></div>

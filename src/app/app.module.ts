@@ -34,6 +34,7 @@ export const firebaseConfig = {
     AppRoutingModule,
   ],
   providers: [AuthService, AngularFireAuth, AuthGuardService],
+  exports: [MaterializeModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

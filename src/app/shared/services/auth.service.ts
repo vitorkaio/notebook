@@ -3,6 +3,13 @@ import { IUsuario } from '../models/usuario';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+/**
+ * Classe responsável por consultar os dados do usuário no firebase, como estado de login, realizar o login,
+ * logout e etc.
+ *
+ * @export
+ * @class AuthService
+ */
 @Injectable()
 export class AuthService {
 
@@ -10,8 +17,15 @@ export class AuthService {
 
   }
 
-  // Cadastra um usuário no firebase.
-  public cadastarUsuario(usuario: IUsuario){
+  /**
+   * Retorna uma promessa se o usuário foi cadastrado ou não. Em caso afirmativo retorna um objeto, caso
+   * contrário retorna null.
+   *
+   * @param {IUsuario} usuario
+   * @returns {Promise<{}>}
+   * @memberof AuthService
+   */
+  public cadastarUsuario(usuario: IUsuario): Promise<{}>{
 
     return new Promise(res =>{
       console.log(usuario);
@@ -33,8 +47,14 @@ export class AuthService {
 
   }// Fim do cadastarUsuario
 
-  // Faz o login no sistema.
-  public doLogin(usuario: IUsuario){
+  /**
+   * Faz o login no sistema.
+   *
+   * @param {IUsuario} usuario
+   * @returns {Promise<{}>}
+   * @memberof AuthService
+   */
+  public doLogin(usuario: IUsuario): Promise<{}>{
 
     return new Promise(res => {
       const promise = this.af.auth.signInWithEmailAndPassword(usuario.email, usuario.senha);
@@ -54,8 +74,13 @@ export class AuthService {
 
   }// doLogin
 
-  // Verifica se um usuário está logado no sistema.
-  public isLogged(){
+  /**
+   * Verifica se um usuário está logado no sistema.
+   *
+   * @returns {Promise<{}>}
+   * @memberof AuthService
+   */
+  public isLogged(): Promise<{}>{
     return new Promise(res => {
       this.af.auth.onAuthStateChanged(state => {
         console.log(state);
@@ -64,8 +89,13 @@ export class AuthService {
     });
   }
 
-  // Faz o logout do sistema.
-  public doLogout(){
+
+  /**
+   * Faz o logout do sistema
+   *
+   * @memberof AuthService
+   */
+  public doLogout(): void{
     this.af.auth.signOut();
     this.rota.navigate(['/login']);
   }

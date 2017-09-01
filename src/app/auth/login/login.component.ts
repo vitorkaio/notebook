@@ -10,8 +10,17 @@ import {
   AbstractControl
 } from "@angular/forms";
 
+import {MaterializeAction} from 'angular2-materialize';
+
 import { Router } from '@angular/router';
 
+/**
+ *
+ *
+ * @export
+ * @class LoginComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,79 +41,101 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Faz o login no sistema
+
+  /**
+   * Faz o login no sistema.
+   *
+   * @memberof LoginComponent
+   */
   public login(){
     console.log(this.formulario);
     this.display = true;
 
-          setTimeout(function(){}, 6000);
+    if(this.formulario.valid){
+      let usuario: IUsuario = {};
 
-        if(this.formulario.valid){
-          let usuario: IUsuario = {};
-          usuario.email = this.formulario.value.email;
-          usuario.senha = this.formulario.value.senha;
+      usuario.email = this.formulario.value.email;
+      usuario.senha = this.formulario.value.senha;
 
-          const promise = this.authService.doLogin(usuario)
+      const promise = this.authService.doLogin(usuario)
 
-          promise.then(res => {
-            console.log('login-componente')
-            console.log(res);
+      promise.then(res => {
+        console.log('login-componente')
+        console.log(res);
 
-            // Verifica se o email já existe no sistema.
-            if(res['code']){
-              if(res['code'] == 'auth/wrong-password' || res['code'] == 'auth/user-not-found'){
-                this.userExist = true;
-              }
-
-            }
-
-            else{
-              this.formulario.reset();
-              this.userExist = false;
-              this.rota.navigate(['/notes']);
-            }
-
-          this.display = false;
-
-
-          }).catch(er => {
-            console.log('cadastrar-componente')
-            console.log(er);
-          });
-
-
+        // Verifica se o email já existe no sistema.
+        if(res['code']){
+          if(res['code'] == 'auth/wrong-password' || res['code'] == 'auth/user-not-found'){
+            this.userExist = true;
+          }
         }
+        else{
+          console.log('redirect for notes');
+          this.formulario.reset();
+          this.userExist = false;
+          this.rota.navigate(['/notes']);
+        }
+
+      this.display = false;
+
+      }).catch(er => {
+        console.log('cadastrar-componente')
+        console.log(er);
+      });
+
+    }
 
   }// Fim do login
 
   // ************************************ Trata erros do form ************************************
 
-  public verificaRequired(campo: any){
+
+  /**
+   * Verifica se o campo está em branco
+   *
+   * @param {*} campo
+   * @returns {boolean}
+   * @memberof LoginComponent
+   */
+  public verificaRequired(campo: any): boolean{
     if(this.formulario.get(campo).errors != null)
       return this.formulario.get(campo).errors['required'] && this.formulario.get(campo).touched ? true : !true;
   }
 
-  public verificaEmail(email: any){
+
+  /**
+   * Verifica se o email é válido.
+   *
+   * @param {*} email
+   * @returns {boolean}
+   * @memberof LoginComponent
+   */
+  public verificaEmail(email: any): boolean{
     if(this.formulario.get(email).errors != null)
       return this.formulario.get(email).errors['email'] && this.formulario.get(email).touched ? true : !true;
   }
 
-  public minSenhaRequired(senha: any){
+
+  /**
+   * Verifica se a senha possui 6 dígitos.
+   *
+   * @param {*} senha
+   * @returns {boolean}
+   * @memberof LoginComponent
+   */
+  public minSenhaRequired(senha: any): boolean{
     if(this.formulario.get(senha).errors != null)
       return this.formulario.get(senha).errors['minlength'] && this.formulario.get(senha).touched ? true : !true;
   }
 
-  public limpaErroCredencial(){
+
+  /**
+   * limpa o erro de credencial existente.
+   *
+   * @memberof LoginComponent
+   */
+  public limpaErroCredencial(): void{
     this.userExist = false;
   }
 
- /* public logado(){
-    this.authService.isLogged();
-  }
-
-  public sair(){
-    console.log('logout');
-    this.authService.doLogout();
-  }*/
-
-}
+}// Fim do login componente

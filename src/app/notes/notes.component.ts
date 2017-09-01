@@ -8,13 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesComponent implements OnInit {
 
+  public userLogged: string = '';
+  public texto: string;
+
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.authService.isLogged().then(res => {
+      this.userLogged = res['email'];
+    });
   }
 
-  public logout(){
-    this.authService.doLogout();
+  public salvarTexto(): void{
+    console.log(this.texto);
   }
 
 }

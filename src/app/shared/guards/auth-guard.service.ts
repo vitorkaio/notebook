@@ -11,6 +11,14 @@ import {
 export class AuthGuardService implements CanActivate {
   constructor(private rota: Router, private authService: AuthService) {}
 
+  /**
+   * Verifica se o usuário pode acessar a rota /notes. É executado sempre que a rota é disparada.
+   *
+   * @param {ActivatedRouteSnapshot} route
+   * @param {RouterStateSnapshot} state
+   * @returns {Promise<boolean>}
+   * @memberof AuthGuardService
+   */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
@@ -19,14 +27,12 @@ export class AuthGuardService implements CanActivate {
     console.log("Para: " + state.url);
 
     return new Promise(resolve => {
-
-      this.checkLogin(url).then(res => {
+      this.checkLogin().then(res => {
         if(res != null){
           console.log("notes");
           resolve(true);
           return true;
         }
-        console.log('not user logged');
         this.rota.navigate(["/login"]);
         resolve(false);
         return false;
@@ -36,8 +42,13 @@ export class AuthGuardService implements CanActivate {
 
   }
 
-  // Arrumar Isso aqui.
-  public checkLogin(url: string) {
+  /**
+   * Consulta o authService para verificar a situação do login do usuário.
+   *
+   * @returns {Promise<{}>}
+   * @memberof AuthGuardService
+   */
+  public checkLogin(): Promise<{}> {
     return new Promise(resolve => {
       const promise = this.authService.isLogged();
       promise.then(res => {

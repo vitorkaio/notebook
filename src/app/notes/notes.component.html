@@ -1,5 +1,23 @@
-<p>
-  notes works!
-</p>
+<app-barras [user]="userLogged"></app-barras>
 
-<button (click)="logout()">logout</button>
+<div class="container">
+  <div class="row">
+
+    <div class="col s12 m4 l3 xl3">
+      <div class="collection">
+        <a  class="collection-item">Alvin</a>
+        <a  class="collection-item active">Alvin</a>
+        <a  class="collection-item">Alvin</a>
+        <!-- <a href="#!" class="collection-item">Alvin</a> -->
+      </div>
+    </div>
+    <div class="col s0 m0 l1 xl1"></div>
+    <div class="col s12 m7 l8 xl8">
+      <p-editor [(ngModel)]="texto" [style]="{'height':'320px'}"></p-editor>
+
+      <button (click)="salvarTexto()">Salvar</button>
+      <button type="button" label="Clear" icon="fa-close" (click)="texto=null">Limpar</button>
+    </div>
+
+  </div>
+</div>
