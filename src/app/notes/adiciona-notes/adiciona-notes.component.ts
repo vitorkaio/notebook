@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogsService } from "../dialogs/confirm-dialogs/dialogs.service";
 
 @Component({
   selector: 'app-adiciona-notes',
@@ -8,14 +9,24 @@ import { Component, OnInit } from '@angular/core';
 export class AdicionaNotesComponent implements OnInit {
 
   public texto: string;
+  public result: any;
 
-  constructor() { }
+  constructor(private dialogsService: DialogsService) { }
 
   ngOnInit() {
   }
 
   public salvarTexto(): void{
-    console.log(this.texto);
+    this.openDialog();
+  }
+
+  public openDialog() {
+    this.dialogsService
+      .confirm('Confirmação...', 'Qual é o título da nota?')
+      .subscribe(res => {
+        console.log(res);
+        console.log(this.texto);
+      });
   }
 
 }

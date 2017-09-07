@@ -6,6 +6,9 @@ import { MdToolbarModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdMenuModule } from '@angular/material';
+import {MdSidenavModule} from '@angular/material';
+import {MdListModule} from '@angular/material';
+
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -14,7 +17,9 @@ import { FooterComponent } from './footer/footer.component';
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
-    MdMenuModule
+    MdMenuModule,
+    MdSidenavModule,
+    MdListModule
   ],
   declarations: [BarrasComponent, FooterComponent],
   exports: [BarrasComponent, FooterComponent]

@@ -1,3 +1,4 @@
+import { DialogsModule } from './dialogs/dialogs.module';
 import { BarrasModule } from './barras/barras.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { NotesRoutingModule } from './notes.routing.module';
@@ -14,6 +15,7 @@ import {MdPaginatorModule} from '@angular/material';
 import {MdButtonModule} from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import {MdTooltipModule} from '@angular/material';
+import {MdDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -27,7 +29,9 @@ import {MdTooltipModule} from '@angular/material';
     MdPaginatorModule,
     MdButtonModule,
     MdIconModule,
-    MdTooltipModule
+    MdTooltipModule,
+    MdDialogModule,
+    DialogsModule
   ],
   declarations: [NotesComponent, ListaNotesComponent, AdicionaNotesComponent]
 

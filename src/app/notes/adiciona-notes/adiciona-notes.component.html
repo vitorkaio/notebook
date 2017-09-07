@@ -1,18 +1,25 @@
-<div class="row">
-  <div class="col s1 m1 l1 xl1">
-    <button md-icon-button color="primary">
-      <md-icon class="md-24" routerLink="/notes" mdTooltip="Lista de notas">arrow_back</md-icon>
-    </button>
+<div class="container addiciona">
+  <div class="row">
+    <div class="col s12 m12 l12 xl12">
+      <button md-icon-button color="primary" routerLink="/notes">
+        <md-icon >arrow_back</md-icon>
+        <span>Lista</span>
+      </button>
+    </div>
   </div>
-  <div class="col s11 m11 l11 xl11">
-    <p-editor [(ngModel)]="texto" [style]="{'height':'320px'}"></p-editor>
+  <div class="row">
+    <div class="col s12 m12 l12 xl12">
+      <p-editor [(ngModel)]="texto" [style]="{'height':'320px'}"></p-editor>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col s1 m1 l1 xl1"></div>
-  <div class="col s11 m11 l11 xl11">
-    <button md-raised-button color="primary" (click)="salvarTexto()">Salvar</button>
-    <!--button md-raised-button color="warn" (click)="texto=null">Limpar</button-->
+  <div class="row">
+    <div class="col s4 m5 l5 xl5"></div>
+    <div class="col s4 m3 l3 xl3">
+      <button md-raised-button color="primary" (click)="salvarTexto()">Salvar</button>
+      <!--button md-raised-button color="warn" (click)="texto=null">Limpar</button-->
+    </div>
+    <div class="col s4 m4 l4 xl4"></div>
   </div>
+
 </div>
