@@ -1,4 +1,4 @@
-<nav class=" blue darken-3">
+<!--nav class=" blue darken-3">
   <div class="nav-wrapper">
     <a routerLink="/notes" class="brand-logo right"><img src="assets/img/icon/notebook32.png"></a>
     <ul class="left">
@@ -6,11 +6,28 @@
       <li><a>{{ user }}</a></li>
     </ul>
   </div>
-  <!-- Dropdown Structure -->
   <ul id='dropdown1' class='dropdown-content'>
     <li routerLinkActive="active"><a (click)="logout()">logout</a></li>
     <li><a>Outros</a></li>
   </ul>
 
-</nav>
-<div class="row"></div>
+</nav-->
+<md-toolbar color="primary" class="grey darken-2">
+  <a routerLink="/notes" class="brand-logo right"><img src="assets/img/icon/notebook32.png"></a>
+  <span routerLink="/notes">Notebook</span>
+
+
+  <span class="example-fill-remaining-space"></span>
+
+  <md-menu #appMenu="mdMenu">
+    <button md-menu-item (click)="logout()">
+        <md-icon>exit_to_app</md-icon>
+        <span>Logout</span>
+      </button>
+    <button md-menu-item> Help </button>
+  </md-menu>
+
+  <button md-icon-button [mdMenuTriggerFor]="appMenu">
+       <md-icon>more_vert</md-icon>
+    </button>
+</md-toolbar>

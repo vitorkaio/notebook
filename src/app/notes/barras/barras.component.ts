@@ -1,5 +1,7 @@
 import { AuthService } from './../../shared/services/auth.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MdMenuTrigger } from "@angular/material";
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,6 +12,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BarrasComponent implements OnInit {
 
   @Input() user: string = '';
+  @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
+
+    someMethod() {
+      this.trigger.openMenu();
+    }
 
   constructor(private authService: AuthService) { }
 

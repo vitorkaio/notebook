@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class NotesComponent implements OnInit {
 
   public userLogged: string = '';
-  public texto: string;
 
   constructor(private authService: AuthService) { }
 
@@ -19,8 +18,5 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  public salvarTexto(): void{
-    console.log(this.texto);
-  }
 
 }

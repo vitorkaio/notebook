@@ -19,7 +19,7 @@ export class AuthGuardService implements CanActivate {
    * @returns {Promise<boolean>}
    * @memberof AuthGuardService
    */
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
     console.log("auth.gaurd");

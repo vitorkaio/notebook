@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { MaterializeModule } from 'angular2-materialize';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth} from 'angularfire2/auth';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCjFjCUzmxwolUpV_LtosCNh86-y9yjc8Y",
@@ -32,6 +33,7 @@ export const firebaseConfig = {
     AuthModule,
     NotesModule,
     AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, AngularFireAuth, AuthGuardService],
   exports: [MaterializeModule],
