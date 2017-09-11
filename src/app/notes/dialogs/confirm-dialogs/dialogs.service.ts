@@ -8,7 +8,7 @@ export class DialogsService {
   constructor(private dialog: MdDialog) {}
 
   public confirm(title: string, message: string): Observable<boolean> {
-    console.log('No confirmssss');
+    // console.log('No confirmssss');
     let dialogRef: MdDialogRef<ConfirmDialogsComponent>;
 
     dialogRef = this.dialog.open(ConfirmDialogsComponent);

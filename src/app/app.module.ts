@@ -1,3 +1,6 @@
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FirebaseService } from './shared/services/firebase.service';
+import { AuxService } from './shared/services/aux.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { AppRoutingModule } from './app.routing.module';
@@ -29,13 +32,14 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     MaterializeModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AuthModule,
     NotesModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, AngularFireAuth, AuthGuardService],
+  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxService, FirebaseService],
   exports: [MaterializeModule],
   bootstrap: [AppComponent]
 })
