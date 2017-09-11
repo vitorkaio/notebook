@@ -37,7 +37,6 @@ export class AdicionaNotesComponent implements OnInit {
           let nota: INota = {};
           this.authService.isLogged().then(dados => {
             nota.usuario = dados['email'].toString();
-            nota.usuario = nota.usuario.substr(0, nota.usuario.indexOf('@'));
             nota.titulo = res;
             nota.nota = this.texto.toString();
 

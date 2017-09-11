@@ -1,4 +1,3 @@
-import { AuxService } from './aux.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { IUsuario } from '../models/usuario';
 import { Injectable } from '@angular/core';
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
-  constructor(private af: AngularFireAuth, private rota: Router, private auxService: AuxService) {
+  constructor(private af: AngularFireAuth, private rota: Router) {
 
   }
 
@@ -82,8 +81,6 @@ export class AuthService {
    * @memberof AuthService
    */
   public isLogged(): Promise<{}>{
-    // Testa cripto.
-    this.auxService.encriptaMsg('kaio');
 
     return new Promise(res => {
       this.af.auth.onAuthStateChanged(state => {

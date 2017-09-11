@@ -1,5 +1,5 @@
+import { AuxiliarService } from './auxiliar.service';
 import { INota } from './../models/nota';
-import { AuxService } from './aux.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -12,7 +12,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable()
 export class FirebaseService {
 
-  constructor(private af: AngularFireDatabase, private auxService: AuxService) { }
+  constructor(private af: AngularFireDatabase, private auxService: AuxiliarService) { }
 
   /**
    * Adiciona uma nota no firebase
@@ -27,15 +27,14 @@ export class FirebaseService {
       if (nota != null) {
         console.log('Salvando nota');
         // Encripta dados.
-        // nota.titulo = this.auxService.encriptaMsg(nota.titulo);
-        // nota.nota = this.auxService.encriptaMsg(nota.nota);
-        // nota.data = this.auxService.encriptaMsg(nota.data);
-        // nota.hora = this.auxService.encriptaMsg(nota.hora);
-
+        //  nota.titulo = this.auxService.encriptaMsg(nota.titulo);
+        //  nota.nota = this.auxService.encriptaMsg(nota.nota);
+        //  nota.data = this.auxService.encriptaMsg(nota.data);
+        //  nota.hora = this.auxService.encriptaMsg(nota.hora);
+        nota.usuario = this.auxService.getUserFromEmail(nota.usuario);
         let usersRef = this.af.database.ref("/");
-        usersRef.child("/notas").update({
-            [nota.usuario]: {
-                "titulo": nota.titulo,
+        usersRef.child("/notas/" + nota.usuario).update({
+            [nota.titulo]: {
                 "nota": nota.nota,
                 "data": nota.data,
                 "hora": nota.hora

@@ -1,6 +1,6 @@
+import { AuxiliarService } from './shared/services/auxiliar.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from './shared/services/firebase.service';
-import { AuxService } from './shared/services/aux.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { AppRoutingModule } from './app.routing.module';
@@ -39,7 +39,7 @@ export const firebaseConfig = {
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxService, FirebaseService],
+  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxiliarService, FirebaseService],
   exports: [MaterializeModule],
   bootstrap: [AppComponent]
 })
