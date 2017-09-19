@@ -16,6 +16,9 @@ import {MdButtonModule} from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import {MdTooltipModule} from '@angular/material';
 import {MdDialogModule} from '@angular/material';
+import {DialogModule} from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MdSelectModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -31,7 +34,11 @@ import {MdDialogModule} from '@angular/material';
     MdIconModule,
     MdTooltipModule,
     MdDialogModule,
-    DialogsModule
+    DialogsModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    MdSelectModule
+
   ],
   declarations: [NotesComponent, ListaNotesComponent, AdicionaNotesComponent]
 

@@ -1,3 +1,4 @@
+import { AuxiliarService } from '../shared/services/auxiliar.service';
 import { AuthService } from '../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,11 +11,11 @@ export class NotesComponent implements OnInit {
 
   public userLogged: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private auxiliarService: AuxiliarService) { }
 
   public ngOnInit() {
-    this.authService.isLogged().then(res => {
-      this.userLogged = res['email'];
+    this.auxiliarService.getUsuarioLogado().then(res => {
+      this.userLogged = res;
     });
   }
 

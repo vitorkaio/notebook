@@ -1,3 +1,4 @@
+import { AuxiliarService } from '../../shared/services/auxiliar.service';
 import { AuthService } from './../../shared/services/auth.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MdMenuTrigger } from "@angular/material";
@@ -18,13 +19,17 @@ export class BarrasComponent implements OnInit {
       this.trigger.openMenu();
     }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private auxiliarService: AuxiliarService) { }
 
   public ngOnInit() {
   }
 
   public logout(){
     this.authService.doLogout();
+  }
+
+  public notes(){
+    this.auxiliarService.goRouteNotes();
   }
 
 }

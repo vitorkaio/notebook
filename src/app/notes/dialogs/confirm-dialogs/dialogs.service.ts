@@ -7,13 +7,14 @@ import { Injectable } from "@angular/core";
 export class DialogsService {
   constructor(private dialog: MdDialog) {}
 
-  public confirm(title: string, message: string): Observable<boolean> {
+  public confirm(title: string, message: string, nota: string): Observable<boolean> {
     // console.log('No confirmssss');
     let dialogRef: MdDialogRef<ConfirmDialogsComponent>;
 
     dialogRef = this.dialog.open(ConfirmDialogsComponent);
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.message = message;
+    dialogRef.componentInstance.nota = nota;
 
     return dialogRef.afterClosed();
   }

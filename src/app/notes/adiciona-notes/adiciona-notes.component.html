@@ -1,25 +1,21 @@
 <div class="container addiciona">
   <div class="row">
     <div class="col s12 m12 l12 xl12">
-      <button md-icon-button color="primary" routerLink="/notes">
-        <md-icon >arrow_back</md-icon>
-        <span>Lista</span>
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s12 m12 l12 xl12">
       <p-editor [(ngModel)]="texto" [style]="{'height':'320px'}"></p-editor>
     </div>
   </div>
 
   <div class="row">
-    <div class="col s4 m5 l5 xl5"></div>
-    <div class="col s4 m3 l3 xl3">
-      <button md-raised-button color="primary" (click)="salvarTexto()">Salvar</button>
+    <div class="col s6 m6 l6 xl6">
+      <button class="botaoExpand"  md-raised-button color="primary" (click)="salvarTexto()"
+      [disabled]="texto == null">Salvar</button>
       <!--button md-raised-button color="warn" (click)="texto=null">Limpar</button-->
     </div>
-    <div class="col s4 m4 l4 xl4"></div>
+    <div class="col s6 m6 l6 xl6">
+        <button class="botaoExpand"  md-raised-button color="warn" (click)="limparTexto()"
+        [disabled]="texto == null">Limpar</button>
+        <!--button md-raised-button color="warn" (click)="texto=null">Limpar</button-->
+    </div>
   </div>
 
 </div>

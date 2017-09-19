@@ -1,8 +1,11 @@
+import { OkService } from './ok-dialogs/ok.service';
 import { DialogsService } from './confirm-dialogs/dialogs.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDialogsComponent } from './confirm-dialogs/confirm-dialogs.component';
 import { MdDialogModule, MdButtonModule, MdIconModule, MdInputModule } from '@angular/material';
+import { OkDialogsComponent } from './ok-dialogs/ok-dialogs.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -10,11 +13,12 @@ import { MdDialogModule, MdButtonModule, MdIconModule, MdInputModule } from '@an
     MdDialogModule,
     MdButtonModule,
     MdIconModule,
-    MdInputModule
+    MdInputModule,
+    FormsModule
   ],
-  declarations: [ConfirmDialogsComponent],
-  providers: [DialogsService],
-  exports: [ConfirmDialogsComponent],
-  entryComponents: [ConfirmDialogsComponent]
+  declarations: [ConfirmDialogsComponent, OkDialogsComponent],
+  providers: [DialogsService, OkService],
+  exports: [ConfirmDialogsComponent, OkDialogsComponent],
+  entryComponents: [ConfirmDialogsComponent, OkDialogsComponent]
 })
 export class DialogsModule { }

@@ -1,5 +1,7 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import * as crypto from 'crypto-js';
+import { Router } from '@angular/router';
 
 // npm install crypto-js --save
 
@@ -14,7 +16,7 @@ export class AuxiliarService {
 
   private secret: string = 'minha-mv';
 
-  constructor() { }
+  constructor(private rota: Router, private authService: AuthService) { }
 
   /**
    * Método responsavél por encriptar uma mensagem.
@@ -54,6 +56,29 @@ export class AuxiliarService {
    */
   public getUserFromEmail(email: string): string {
     return email.substr(0, email.indexOf('@'));
+  }
+
+  /**
+   * Redireciona pra rota /notes.
+   *
+   * @memberof AuxiliarService
+   */
+  public goRouteNotes(){
+    this.rota.navigate(['/notes']);
+  }
+
+  /**
+   * Retorna o usuário logado no sistema.
+   *
+   * @returns {Promise<string>}
+   * @memberof AuxiliarService
+   */
+  public getUsuarioLogado(): Promise<string>{
+    return new Promise(resolve => {
+      this.authService.isLogged().then(res => {
+        resolve(res['email']);
+      });
+    });
   }
 
 }

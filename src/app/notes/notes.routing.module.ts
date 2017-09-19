@@ -10,6 +10,7 @@ const LOGIN_ROUTES: Routes = [
       children: [
         {path: 'lista', component: ListaNotesComponent},
         {path: 'adicionar', component: AdicionaNotesComponent},
+        {path: ':titulo/editar', component: AdicionaNotesComponent},
         { path: '', redirectTo: 'lista', pathMatch: 'full' }
     ]},
 

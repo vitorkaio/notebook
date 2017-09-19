@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DialogModule,
     BrowserAnimationsModule
   ],
-  declarations: [AuthComponent, CadastrarComponent, LoginComponent]
+  declarations: [AuthComponent, CadastrarComponent, LoginComponent],
+  exports: [DialogModule, BrowserAnimationsModule]
 })
 export class AuthModule { }

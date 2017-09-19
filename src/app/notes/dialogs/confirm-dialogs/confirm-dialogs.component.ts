@@ -11,6 +11,8 @@ export class ConfirmDialogsComponent implements OnInit {
   public title: string;
   public message: string;
 
+  public nota: string;
+
   constructor(public dialogRef: MdDialogRef<ConfirmDialogsComponent>) {
 
   }

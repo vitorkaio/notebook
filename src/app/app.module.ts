@@ -1,3 +1,4 @@
+import { NotasService } from './shared/services/notas.service';
 import { AuxiliarService } from './shared/services/auxiliar.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from './shared/services/firebase.service';
@@ -14,6 +15,9 @@ import { MaterializeModule } from 'angular2-materialize';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth} from 'angularfire2/auth';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// Para a navbar
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCjFjCUzmxwolUpV_LtosCNh86-y9yjc8Y",
@@ -37,9 +41,10 @@ export const firebaseConfig = {
     AuthModule,
     NotesModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
-  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxiliarService, FirebaseService],
+  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxiliarService, FirebaseService, NotasService],
   exports: [MaterializeModule],
   bootstrap: [AppComponent]
 })

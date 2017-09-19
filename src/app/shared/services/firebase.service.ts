@@ -15,7 +15,7 @@ export class FirebaseService {
   constructor(private af: AngularFireDatabase, private auxService: AuxiliarService) { }
 
   /**
-   * Adiciona uma nota no firebase
+   * Adiciona uma nota no firebase.
    *
    * @param {INota} nota
    * @returns {Promise<boolean>}
@@ -49,6 +49,35 @@ export class FirebaseService {
     else
         resolve(false);
     });
+  }
+
+  /**
+   * Retorna todas as notas do usuário logado.
+   *
+   * @param {string} email email do usuário que logou no sistema.
+   * @returns {Promise<[any]>}
+   * @memberof FirebaseService
+   */
+  public getAllNotes(email: string): Promise<[any]> {
+    return new Promise(resolve => {
+      let refs = this.af.database.ref('/notas/' + email);
+      refs.on('value', (snapshot) => {
+          resolve(snapshot.val());
+          });
+      });
+  }
+
+  public removeNota(user, titulo){
+    return new Promise(resolve => {
+      let usersRef = this.af.database.ref("/");
+      usersRef.child("/notas/" + user + "/" + titulo).remove().then(res => {
+        console.log(res);
+        resolve(true);
+      }).catch(err => {
+        resolve(false);
+      });
+    });
+
   }
 
 }// Fim da classe FirebaseService

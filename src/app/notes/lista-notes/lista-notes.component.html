@@ -1,52 +1,54 @@
 <div class="container lista">
   <div class="row">
-    <div class="example-container mat-elevation-z8">
+    <div class="col s6 m6 l6 xl6">
+      <input type="text" placeholder="Pesquisar" #pes (keyup)="filtraNotas(pes.value)">
+    </div>
+    <div class="col s0 m3 l4 xl4"></div>
+    <div class="col s6 m3 l2 xl2">
+      <md-select placeholder="Ordenar" [(ngModel)]="ordernacaoValue" name="ordernacoes" (change)="ordenar()">
+        <md-option *ngFor="let item of ordernacoes" [value]="item.value">
+          {{item.viewValue}}
+        </md-option>
+      </md-select>
 
-      <md-table #table [dataSource]="dataSource">
-
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- ID Column -->
-        <ng-container mdColumnDef="userId">
-          <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
-          <md-cell *mdCellDef="let row"> {{row.id}} </md-cell>
-        </ng-container>
-
-        <!-- Progress Column -->
-        <ng-container mdColumnDef="progress">
-          <md-header-cell *mdHeaderCellDef> Progress </md-header-cell>
-          <md-cell *mdCellDef="let row"> {{row.progress}}% </md-cell>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container mdColumnDef="userName">
-          <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-          <md-cell *mdCellDef="let row"> {{row.name}} </md-cell>
-        </ng-container>
-
-        <!-- Color Column -->
-        <ng-container mdColumnDef="color">
-          <md-header-cell *mdHeaderCellDef> Color </md-header-cell>
-          <md-cell *mdCellDef="let row" [style.color]="row.color"> {{row.color}} </md-cell>
-        </ng-container>
-
-        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-      </md-table>
-
-      <md-paginator #paginator [length]="exampleDatabase.data.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5]">
-      </md-paginator>
     </div>
   </div>
-
   <div class="row">
-    <div class="col s9 m11 l11 xl11"></div>
-    <div class="col s3 m1 l1 xl1">
-      <a md-fab color="primary" routerLink="/notes/adicionar" mdTooltip="Adicionar notas">
-        <md-icon>add</md-icon>
+    <ul class="collection" *ngFor="let item of listaNotas">
+      <li class="collection-item avatar">
+        <i class="material-icons circle purple">title</i>
+        <span class="title"><strong><a [routerLink]="['/notes', item.titulo, 'editar']">{{ item.titulo }}</a></strong></span>
+        <p>{{ item.info.data }} <br> {{ item.info.hora }}
+        </p>
+        <a md-icon-button color="primary" class="secondary-content" (click)="deletaNota(item)" mdTooltip="Excluir nota" mdTooltipPosition="left">
+          <md-icon>delete</md-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="meuBotao">
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light red" routerLink="/notes/adicionar" mdTooltip="Adicionar notas"
+        mdTooltipPosition="left">
+          <i class="material-icons">add</i>
       </a>
     </div>
   </div>
-
 </div>
+
+<p-dialog header="Carregando notas..." [(visible)]="display" modal="modal" width="300" [responsive]="true">
+  <div class="preloader-wrapper small active">
+    <div class="spinner-layer spinner-green-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

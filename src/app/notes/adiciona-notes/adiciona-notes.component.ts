@@ -1,8 +1,13 @@
+import { OkService } from '../dialogs/ok-dialogs/ok.service';
+import { NotasService } from '../../shared/services/notas.service';
+import { AuxiliarService } from '../../shared/services/auxiliar.service';
 import { AuthService } from './../../shared/services/auth.service';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { INota } from './../../shared/models/nota';
 import { Component, OnInit } from '@angular/core';
 import { DialogsService } from "../dialogs/confirm-dialogs/dialogs.service";
+import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-adiciona-notes',
@@ -13,20 +18,46 @@ export class AdicionaNotesComponent implements OnInit {
 
   public texto: string;
   public result: any;
+  private subs: Subscription;
+
+  private nota: string = '';
 
   constructor(private dialogsService: DialogsService, private fireBaseService: FirebaseService,
-    private authService: AuthService) { }
+    private authService: AuthService, private auxiliarService: AuxiliarService, private route: ActivatedRoute,
+    private notasServices: NotasService, private okDialogService: OkService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.subs = this.route.params.subscribe((params: any) => {
+      let titulo = params['titulo'];
+      if(titulo != undefined){
+        let note = this.notasServices.getNotaListaWithChave(titulo)
+        note.then(res => {
+          console.log(res['info']);
+          this.texto = res['info']['nota'];
+          this.nota = res['titulo'];
+        });
+      }
+
+  });
   }
 
+  /**
+   * Salva a nota.
+   *
+   * @memberof AdicionaNotesComponent
+   */
   public salvarTexto(): void{
     this.openDialog();
   }
 
+  /**
+   * Abre o modal de inserção do título e chama o método que irá gravar a nota no firebase.
+   *
+   * @memberof AdicionaNotesComponent
+   */
   public openDialog() {
     this.dialogsService
-      .confirm('Confirmação...', 'Qual é o título da nota?')
+      .confirm('Confirmação...', 'Qual é o título da nota?', this.nota)
       .subscribe(res => {
         if(res == undefined || res == false || this.texto == null || this.texto == undefined){
           console.log('Erro, precisa de título e uma nota');
@@ -38,10 +69,17 @@ export class AdicionaNotesComponent implements OnInit {
           this.authService.isLogged().then(dados => {
             nota.usuario = dados['email'].toString();
             nota.titulo = res;
+
+            // Retirando a barra do título para evitar erro no firebase.
+            if( nota.titulo.indexOf('/') != -1){
+              console.log('Tem a -> /');
+              nota.titulo =  nota.titulo.substr(0,  nota.titulo.indexOf('/'));
+            }
+
             nota.nota = this.texto.toString();
 
-            console.log(nota.titulo);
-            console.log(nota.nota);
+            // console.log(nota.titulo);
+            // console.log(nota.nota);
 
             let date = new Date();
             nota.data = date.toLocaleDateString();
@@ -51,6 +89,8 @@ export class AdicionaNotesComponent implements OnInit {
             promise.then(res => {
               if(res == true){
                 console.log('Nota - salva');
+                this.texto = null;
+                this.auxiliarService.goRouteNotes();
               }
               else{
                 console.log('Nota - falha ao salvar nota');
@@ -62,6 +102,17 @@ export class AdicionaNotesComponent implements OnInit {
         }// else
 
       });
+  }
+
+  public limparTexto(){
+    this.okDialogService
+    .confirm('Confirmação...', 'Tem certeza que deseja limpar a nota?')
+    .subscribe(res => {
+      if(res == true){
+        this.texto = null;
+        this.nota = '';
+      }
+    });
   }
 
 }

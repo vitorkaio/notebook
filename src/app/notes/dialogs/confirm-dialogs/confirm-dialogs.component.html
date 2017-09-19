@@ -1,5 +1,10 @@
 <p>{{ title }}</p>
 <p>{{ message }}</p>
-<input mdInput #campo>
-<button color="primary" md-raised-button (click)="dialogRef.close(campo.value)" [disabled]="campo.value == ''">Salvar</button>
+
+<input mdInput [(ngModel)]="nota">
+
+<button color="primary" md-raised-button (click)="dialogRef.close(nota)"
+  [disabled]=" nota == ''">Salvar
+</button>
+
 <button color="warn" md-raised-button (click)="dialogRef.close(false)">Cancelar</button>
