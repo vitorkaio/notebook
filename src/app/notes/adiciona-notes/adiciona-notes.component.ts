@@ -1,3 +1,4 @@
+import { INoteCanDiactive } from './../../shared/models/deacativeNote';
 import { OkService } from '../dialogs/ok-dialogs/ok.service';
 import { NotasService } from '../../shared/services/notas.service';
 import { AuxiliarService } from '../../shared/services/auxiliar.service';
@@ -14,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './adiciona-notes.component.html',
   styleUrls: ['./adiciona-notes.component.sass']
 })
-export class AdicionaNotesComponent implements OnInit {
+export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
 
   public texto: string;
   public result: any;
@@ -27,7 +28,7 @@ export class AdicionaNotesComponent implements OnInit {
     private notasServices: NotasService, private okDialogService: OkService) { }
 
   public ngOnInit() {
-    this.subs = this.route.params.subscribe((params: any) => {
+    /*this.subs = this.route.params.subscribe((params: any) => {
       let titulo = params['titulo'];
       if(titulo != undefined){
         let note = this.notasServices.getNotaListaWithChave(titulo)
@@ -38,6 +39,15 @@ export class AdicionaNotesComponent implements OnInit {
         });
       }
 
+  });*/
+  this.subs = this.route.data.subscribe((info) => {
+    for (var key in info) {
+      if (info.hasOwnProperty(key)) {
+        this.texto = info[key]['info']['nota']
+        this.nota = info[key]['titulo']
+      }
+   }
+    //this.texto = info.aluno;
   });
   }
 
@@ -114,5 +124,22 @@ export class AdicionaNotesComponent implements OnInit {
       }
     });
   }
+
+    public podeDesativar(): Promise<boolean> | boolean{
+      console.log('Saindoooo do add');
+      // Verifica se o campo está vazio, se estiver, sai.
+      if(this.texto == null){
+        return true;
+      }
+
+      return new Promise(resolve => {
+        this.okDialogService
+        .confirm('Confirmação...', 'Tem certeza que deseja sair?')
+        .subscribe(res => {
+          resolve(res);
+        });
+      });
+
+    }
 
 }

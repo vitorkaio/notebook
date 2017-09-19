@@ -9,8 +9,9 @@ const LOGIN_ROUTES: Routes = [
     { path: 'notes', component: NotesComponent, canActivate: [AuthGuardService],
       children: [
         {path: 'lista', component: ListaNotesComponent},
-        {path: 'adicionar', component: AdicionaNotesComponent},
-        {path: ':titulo/editar', component: AdicionaNotesComponent},
+        {path: 'adicionar', component: AdicionaNotesComponent, canDeactivate: [AuthGuardService]},
+        {path: ':titulo/editar', component: AdicionaNotesComponent, canDeactivate: [AuthGuardService],
+        resolve: [AuthGuardService]},
         { path: '', redirectTo: 'lista', pathMatch: 'full' }
     ]},
 

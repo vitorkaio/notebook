@@ -1,15 +1,21 @@
+import { NotasService } from '../services/notas.service';
+import { INoteCanDiactive } from "./../models/deacativeNote";
 import { AuthService } from "../services/auth.service";
 import { Injectable } from "@angular/core";
 import {
   CanActivate,
+  CanDeactivate,
+  Resolve,
   Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from "@angular/router";
+import { Observable } from "rxjs/Rx";
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
-  constructor(private rota: Router, private authService: AuthService) {}
+export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiactive>, Resolve<any> {
+
+  constructor(private rota: Router, private authService: AuthService, private notasService: NotasService) {}
 
   /**
    * Verifica se o usuário pode acessar a rota /notes. É executado sempre que a rota é disparada.
@@ -19,7 +25,10 @@ export class AuthGuardService implements CanActivate {
    * @returns {Promise<boolean>}
    * @memberof AuthGuardService
    */
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  public canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
     let url: string = state.url;
 
     console.log("auth.gaurd");
@@ -28,7 +37,7 @@ export class AuthGuardService implements CanActivate {
 
     return new Promise(resolve => {
       this.checkLogin().then(res => {
-        if(res != null){
+        if (res != null) {
           console.log("notes");
           resolve(true);
           return true;
@@ -37,10 +46,34 @@ export class AuthGuardService implements CanActivate {
         resolve(false);
         return false;
       });
-
     });
-
   }
+
+  public canDeactivate(
+    component: INoteCanDiactive,
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log("AlunoGuardsDeactivateService: canDeactivate");
+
+    /*if(component.mudouCampo)
+        return false;*/
+
+    //return component.changeRouter ? component.changeRouter() : true;
+    return component.podeDesativar ? component.podeDesativar() : true;
+  }
+
+  public resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+    ): Observable<any>|Promise<any>|any {
+
+        console.log('Editar nota: Resolve');
+
+        let nota = route.params['titulo'];
+
+        return this.notasService.getNotaListaWithChave(nota);
+}
 
   /**
    * Consulta o authService para verificar a situação do login do usuário.
@@ -56,5 +89,4 @@ export class AuthGuardService implements CanActivate {
       });
     });
   }
-
-}// Fim do authguard
+} // Fim do authguard
