@@ -30,7 +30,7 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
   private okDialogService: OkService, private notasService: NotasService){}
 
   ngOnInit() {
-    console.log('init lista');
+    //console.log('init lista');
     this.auxiliarService.getUsuarioLogado().then(res => {
       this.usuario = this.auxiliarService.getUserFromEmail(res);
       this.firebaseService.getAllNotes(this.usuario).then(res => {
@@ -43,7 +43,7 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
         /*for (var key in res) {
           if (res.hasOwnProperty(key)) {
             this.listaNotas.push({'titulo': key, 'info': res[key]});
-             //console.log(key, res[key]);
+             ////console.log(key, res[key]);
           }
        }*/
        this.display = false;
@@ -54,11 +54,11 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnChanges(){
-    console.log('change component lista');
+    //console.log('change component lista');
   }
 
   ngDoCheck(){
-    //console.log('check component lista');
+    ////console.log('check component lista');
   }
 
   /**
@@ -83,16 +83,16 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
     .subscribe(res => {
       if(res == true){
         this.firebaseService.removeNota(this.usuario, nota.titulo).then(res => {
-          console.log(res);
+          //console.log(res);
           if(res == true){
             this.listaNotas.forEach((item, key) => {
              if(item.titulo == nota.titulo){
                this.listaNotas.splice(key, 1);
                this.listaFiltro = this.listaNotas;
                // Verifica se a lista está vazia.
-                console.log(this.listaNotas.length);
+                //console.log(this.listaNotas.length);
                 if(this.listaNotas.length == 0){
-                  console.log('Lista vazia');
+                  //console.log('Lista vazia');
                   this.notasVazias = false;
                 }
                 else
@@ -132,17 +132,17 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
    * @memberof ListaNotesComponent
    */
   public ordenar(){
-    console.log('Escolha: ' + this.ordernacaoValue);
+    //console.log('Escolha: ' + this.ordernacaoValue);
     if(this.ordernacaoValue == '0'){
-      console.log('recentes');
+      //console.log('recentes');
       this.listaNotas.sort(this.comparaDataRecente);
     }
     else if(this.ordernacaoValue == '1'){
-      console.log('antigas');
+      //console.log('antigas');
       this.listaNotas.sort(this.comparaDataAntigas);
     }
     else{
-      console.log('titulo');
+      //console.log('titulo');
       this.listaNotas.sort(this.comparaTitulo);
     }
 

@@ -31,9 +31,9 @@ export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiac
   ): Promise<boolean> {
     let url: string = state.url;
 
-    console.log("auth.gaurd");
-    console.log("De: " + this.rota.url);
-    console.log("Para: " + state.url);
+    //console.log("auth.gaurd");
+    //console.log("De: " + this.rota.url);
+    //console.log("Para: " + state.url);
 
     return new Promise(resolve => {
       this.checkLogin().then(res => {
@@ -41,7 +41,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiac
         // Verifica se o usuário está cadastrado e autentica o mesmo.
         if (res != null) {
           // Verifica se o usuário confirmou o email.
-          console.log('Email - verify: ' + res['emailVerified']);
+          //console.log('Email - verify: ' + res['emailVerified']);
           if(res['emailVerified']){
             resolve(true);
             return true;
@@ -64,7 +64,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiac
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log("AlunoGuardsDeactivateService: canDeactivate");
+    //console.log("AlunoGuardsDeactivateService: canDeactivate");
 
     /*if(component.mudouCampo)
         return false;*/
@@ -78,7 +78,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiac
     state: RouterStateSnapshot
     ): Observable<any>|Promise<any>|any {
 
-        console.log('Editar nota: Resolve');
+        //console.log('Editar nota: Resolve');
 
         let nota = route.params['titulo'];
 

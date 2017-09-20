@@ -28,7 +28,7 @@ export class AuxiliarService {
   public encriptaMsg(msg: string): string {
     let ciphertext = crypto.AES.encrypt(msg, this.secret);
     return ciphertext.toString();
-    // console.log(ciphertext.toString());
+    // //console.log(ciphertext.toString());
   }
 
   /**
@@ -41,7 +41,7 @@ export class AuxiliarService {
   public desencriptaMsg(msg: string): string {
     let bytes  = crypto.AES.decrypt(msg.toString(), this.secret);
     let plaintext = bytes.toString(crypto.enc.Utf8);
-    // console.log(plaintext);
+    // //console.log(plaintext);
     return plaintext;
   }
 

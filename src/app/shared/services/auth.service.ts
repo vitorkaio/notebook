@@ -30,11 +30,11 @@ export class AuthService {
   public cadastarUsuario(usuario: IUsuario): Promise<{}>{
 
     return new Promise(res =>{
-      console.log(usuario);
+      //console.log(usuario);
       const promise = this.af.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha);
 
       promise.then(r => {
-        //console.log(r);
+        ////console.log(r);
         return new Promise(resolve => {
           this.af.auth.onAuthStateChanged(status =>{
             status.sendEmailVerification();
@@ -42,7 +42,7 @@ export class AuthService {
           });
         });
       }).catch(er => {
-        //console.log(er);
+        ////console.log(er);
         return new Promise(resolve => {
           res(er);
         });
@@ -64,12 +64,12 @@ export class AuthService {
     return new Promise(res => {
       const promise = this.af.auth.signInWithEmailAndPassword(usuario.email, usuario.senha);
       promise.then(r => {
-        //console.log(r);
+        ////console.log(r);
         return new Promise(resolve => {
           res(r);
         });
       }).catch(er => {
-        //console.log(er);
+        ////console.log(er);
         return new Promise(resolve => {
           res(er);
         });
@@ -89,7 +89,7 @@ export class AuthService {
 
     return new Promise(res => {
       this.af.auth.onAuthStateChanged(state => {
-        //console.log(state);
+        ////console.log(state);
         res(state);
        });
     });

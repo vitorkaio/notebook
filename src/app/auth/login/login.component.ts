@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
    * @memberof LoginComponent
    */
   public login(){
-    console.log(this.formulario);
+    //console.log(this.formulario);
     this.display = true;
 
     if(this.formulario.valid){
@@ -60,8 +60,8 @@ export class LoginComponent implements OnInit {
       const promise = this.authService.doLogin(usuario)
 
       promise.then(res => {
-        console.log('login-componente')
-        console.log(res);
+        //console.log('login-componente')
+        //console.log(res);
 
         // Verifica se o email já existe no sistema.
         if(res['code']){
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           }
         }
         else{
-          console.log('redirect for notes');
+          //console.log('redirect for notes');
           this.formulario.reset();
           this.userExist = false;
           this.rota.navigate(['/notes']);
@@ -79,8 +79,8 @@ export class LoginComponent implements OnInit {
       this.display = false;
 
       }).catch(er => {
-        console.log('cadastrar-componente')
-        console.log(er);
+        //console.log('cadastrar-componente')
+        //console.log(er);
       });
 
     }

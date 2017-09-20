@@ -34,7 +34,7 @@ export class CadastrarComponent implements OnInit {
 
   // Cadastra usuário no sistema.
   public cadastrar(){
-    //console.log(this.formulario);
+    ////console.log(this.formulario);
 
     this.display = true;
 
@@ -48,8 +48,8 @@ export class CadastrarComponent implements OnInit {
       const promise = this.authService.cadastarUsuario(usuario)
 
       promise.then(res => {
-        console.log('cadastrar-componente')
-        console.log(res);
+        //console.log('cadastrar-componente')
+        //console.log(res);
 
         // Verifica se o email já existe no sistema.
         if(res['code']){
@@ -69,8 +69,8 @@ export class CadastrarComponent implements OnInit {
 
 
       }).catch(er => {
-        console.log('cadastrar-componente')
-        console.log(er);
+        //console.log('cadastrar-componente')
+        //console.log(er);
       });
 
 

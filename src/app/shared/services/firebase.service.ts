@@ -25,7 +25,7 @@ export class FirebaseService {
     //
     return new Promise(resolve => {
       if (nota != null) {
-        console.log('Salvando nota');
+        //console.log('Salvando nota');
         // Encripta dados.
         //nota.titulo = this.auxService.encriptaMsg(nota.titulo);
         nota.nota = this.auxService.encriptaMsg(nota.nota);
@@ -42,7 +42,7 @@ export class FirebaseService {
             }
 
         }).catch(err=>{
-          console.log(err);
+          //console.log(err);
         });
         resolve(true);
     }
@@ -70,11 +70,11 @@ export class FirebaseService {
           for (var key in aux) {
             if (aux.hasOwnProperty(key)) {
               lista.push({'titulo':  key, 'info': aux[key]});
-               //console.log(key, res[key]);
+               ////console.log(key, res[key]);
             }
          }
          for(let i in lista){
-           //console.log(lista[i].info);
+           ////console.log(lista[i].info);
           lista[i].info.data = this.auxService.desencriptaMsg(lista[i].info.data);
           lista[i].info.hora = this.auxService.desencriptaMsg(lista[i].info.hora);
           lista[i].info.nota = this.auxService.desencriptaMsg(lista[i].info.nota);
@@ -96,7 +96,7 @@ export class FirebaseService {
     return new Promise(resolve => {
       let usersRef = this.af.database.ref("/");
       usersRef.child("/notas/" + user + "/" + titulo).remove().then(res => {
-        console.log(res);
+        //console.log(res);
         resolve(true);
       }).catch(err => {
         resolve(false);

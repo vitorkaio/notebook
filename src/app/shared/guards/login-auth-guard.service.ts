@@ -20,8 +20,8 @@ export class LoginAuthGuardService implements CanActivate {
 
         // Se o usuario estiver logado não permite ele acessar a tela de login ou cadastro.
         // Só permite se o email ainda não foi verificado.
-        console.log("login.auth.guard");
-        console.log(res);
+        //console.log("login.auth.guard");
+        //console.log(res);
         if(res == null){
           resolve(true);
         }

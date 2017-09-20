@@ -45,7 +45,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
       if(titulo != undefined){
         let note = this.notasServices.getNotaListaWithChave(titulo)
         note.then(res => {
-          console.log(res['info']);
+          //console.log(res['info']);
           //this.texto = res['info']['nota'];
           this.nota = res['titulo'];
           this.iniciaCampos(res['info']['nota']);
@@ -54,7 +54,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
       }
 
       else{
-        console.log('vazio texto');
+        //console.log('vazio texto');
         this.display = false;
       }
   });
@@ -77,7 +77,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
    */
   public iniciaCampos(text: string){
     setTimeout(function(t){
-      console.log('Dentro do timeout');
+      ////console.log('Dentro do timeout');
       this.texto = text;
       this.display = false;
     }.bind(this), 1000);
@@ -102,7 +102,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
       .confirm('Confirmação...', 'Qual é o título da nota?', this.nota)
       .subscribe(res => {
         if(res == undefined || res == false || this.texto == null || this.texto == undefined){
-          console.log('Erro, precisa de título e uma nota');
+          //console.log('Erro, precisa de título e uma nota');
         }
 
         else{
@@ -114,15 +114,15 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
 
             // Retirando a barra do título para evitar erro no firebase.
             if( nota.titulo.indexOf('/') != -1){
-              console.log('Tem a -> /');
+              //console.log('Tem a -> /');
               nota.titulo =  nota.titulo.substr(0,  nota.titulo.indexOf('/'));
             }
 
             nota.titulo = nota.titulo.toLocaleLowerCase();
             nota.nota = this.texto.toString();
 
-            // console.log(nota.titulo);
-            // console.log(nota.nota);
+            // //console.log(nota.titulo);
+            // //console.log(nota.nota);
 
             let date = new Date();
             nota.data = date.toLocaleDateString();
@@ -131,12 +131,12 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
             let promise = this.fireBaseService.addNota(nota);
             promise.then(res => {
               if(res == true){
-                console.log('Nota - salva');
+                //console.log('Nota - salva');
                 this.texto = null;
                 this.auxiliarService.goRouteNotes();
               }
               else{
-                console.log('Nota - falha ao salvar nota');
+                //console.log('Nota - falha ao salvar nota');
               }
 
             });
@@ -170,7 +170,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
      * @memberof AdicionaNotesComponent
      */
     public podeDesativar(): Promise<boolean> | boolean{
-      console.log('Saindoooo do add');
+      //console.log('Saindoooo do add');
       // Verifica se o campo está vazio, se estiver, sai.
       if(this.texto == null){
         return true;
