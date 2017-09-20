@@ -55,7 +55,11 @@ export class AuxiliarService {
    * @memberof AuxService
    */
   public getUserFromEmail(email: string): string {
-    return email.substr(0, email.indexOf('@'));
+    let user = email.split('.').join('');
+    user = user.split('@').join('');
+    user = user.split('_').join('');
+    user = user.split('-').join('');
+    return user;
   }
 
   /**
@@ -68,6 +72,24 @@ export class AuxiliarService {
   }
 
   /**
+   * Vai pra rota de login.
+   *
+   * @memberof AuxiliarService
+   */
+  public goRouteLogin(){
+    this.rota.navigate(['/login']);
+  }
+
+  /**
+   * Vai para rota deletar conta.
+   *
+   * @memberof AuxiliarService
+   */
+  public goRouteConta(){
+    this.rota.navigate(['/notes/conta']);
+  }
+
+  /**
    * Retorna o usuário logado no sistema.
    *
    * @returns {Promise<string>}
@@ -76,7 +98,18 @@ export class AuxiliarService {
   public getUsuarioLogado(): Promise<string>{
     return new Promise(resolve => {
       this.authService.isLogged().then(res => {
-        resolve(res['email']);
+        try{
+          let email = res['email'];
+          // Verifica se o email foi verificado.
+          if(res['emailVerified'])
+            resolve(res['email']);
+          else
+            resolve(null);
+        // resolve(res['email']);
+      }
+      catch(err){
+        resolve(null);
+      }
       });
     });
   }

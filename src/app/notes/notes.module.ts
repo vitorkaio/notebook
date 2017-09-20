@@ -19,6 +19,7 @@ import {MdDialogModule} from '@angular/material';
 import {DialogModule} from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MdSelectModule} from '@angular/material';
+import { ContaComponent } from './conta/conta.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,7 @@ import {MdSelectModule} from '@angular/material';
     MdSelectModule
 
   ],
-  declarations: [NotesComponent, ListaNotesComponent, AdicionaNotesComponent]
+  declarations: [NotesComponent, ListaNotesComponent, AdicionaNotesComponent, ContaComponent]
 
 })
 export class NotesModule { }

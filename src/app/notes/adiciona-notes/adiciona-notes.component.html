@@ -1,10 +1,11 @@
-<div class="container addiciona">
+<div class=" addiciona">
   <div class="row">
-    <div class="col s12 m12 l12 xl12">
-      <p-editor [(ngModel)]="texto" [style]="{'height':'320px'}"></p-editor>
+    <div class="editor">
+      <p-editor [(ngModel)]="texto" [style]="{'height':'360px'}"></p-editor>
     </div>
   </div>
 
+  <div class="container">
   <div class="row">
     <div class="col s6 m6 l6 xl6">
       <button class="botaoExpand"  md-raised-button color="primary" (click)="salvarTexto()"
@@ -17,5 +18,23 @@
         <!--button md-raised-button color="warn" (click)="texto=null">Limpar</button-->
     </div>
   </div>
+  </div>
 
 </div>
+
+<p-dialog header="Carregando a nota..." [(visible)]="display" modal="modal" width="300" [responsive]="true">
+  <div class="preloader-wrapper small active">
+    <div class="spinner-layer spinner-green-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+

@@ -1,3 +1,4 @@
+import { LoginAuthGuardService } from './shared/guards/login-auth-guard.service';
 import { NotasService } from './shared/services/notas.service';
 import { AuxiliarService } from './shared/services/auxiliar.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -18,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // Para a navbar
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCjFjCUzmxwolUpV_LtosCNh86-y9yjc8Y",
@@ -31,7 +33,8 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PaginaNaoEncontradaComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,7 @@ export const firebaseConfig = {
     BrowserAnimationsModule,
     FlexLayoutModule
   ],
-  providers: [AuthService, AngularFireAuth, AuthGuardService, AuxiliarService, FirebaseService, NotasService],
+  providers: [AuthService, AngularFireAuth, AuthGuardService, LoginAuthGuardService, AuxiliarService, FirebaseService, NotasService],
   exports: [MaterializeModule],
   bootstrap: [AppComponent]
 })

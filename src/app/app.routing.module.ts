@@ -1,3 +1,4 @@
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
@@ -11,6 +12,7 @@ const APP_ROUTES: Routes = [
     canActivateChild: [AlunoGuardsService] },
     { path: '', component: HomeComponent, canActivate: [AuthGuardsService], canLoad: [AuthGuardsService] },
     { path: 'login', component: LoginComponent },*/
+    {path: '**', component: PaginaNaoEncontradaComponent}
 ];
 
 @NgModule({

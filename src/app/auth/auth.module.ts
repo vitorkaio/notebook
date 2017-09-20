@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VerificarEmailComponent } from './verificar-email/verificar-email.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DialogModule,
     BrowserAnimationsModule
   ],
-  declarations: [AuthComponent, CadastrarComponent, LoginComponent],
+  declarations: [AuthComponent, CadastrarComponent, LoginComponent, VerificarEmailComponent],
   exports: [DialogModule, BrowserAnimationsModule]
 })
 export class AuthModule { }

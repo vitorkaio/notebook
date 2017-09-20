@@ -10,6 +10,14 @@ import { DialogsService } from "../dialogs/confirm-dialogs/dialogs.service";
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 
+/**
+ * Classe que representa o componente para adicionar notas.
+ *
+ * @export
+ * @class AdicionaNotesComponent
+ * @implements {OnInit}
+ * @implements {INoteCanDiactive}
+ */
 @Component({
   selector: 'app-adiciona-notes',
   templateUrl: './adiciona-notes.component.html',
@@ -23,24 +31,34 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
 
   private nota: string = '';
 
+  public display: boolean = true;
+
   constructor(private dialogsService: DialogsService, private fireBaseService: FirebaseService,
     private authService: AuthService, private auxiliarService: AuxiliarService, private route: ActivatedRoute,
-    private notasServices: NotasService, private okDialogService: OkService) { }
+    private notasServices: NotasService, private okDialogService: OkService) {
+      this.display = true;
+     }
 
   public ngOnInit() {
-    /*this.subs = this.route.params.subscribe((params: any) => {
+    this.subs = this.route.params.subscribe((params: any) => {
       let titulo = params['titulo'];
       if(titulo != undefined){
         let note = this.notasServices.getNotaListaWithChave(titulo)
         note.then(res => {
           console.log(res['info']);
-          this.texto = res['info']['nota'];
+          //this.texto = res['info']['nota'];
           this.nota = res['titulo'];
+          this.iniciaCampos(res['info']['nota']);
+          return;
         });
       }
 
-  });*/
-  this.subs = this.route.data.subscribe((info) => {
+      else{
+        console.log('vazio texto');
+        this.display = false;
+      }
+  });
+  /*this.subs = this.route.data.subscribe((info) => {
     for (var key in info) {
       if (info.hasOwnProperty(key)) {
         this.texto = info[key]['info']['nota']
@@ -48,7 +66,21 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
       }
    }
     //this.texto = info.aluno;
-  });
+  });*/
+  }
+
+  /**
+   * Inicia o campo de texto.
+   *
+   * @param {string} text - Uma string contendo o texto que será editado.
+   * @memberof AdicionaNotesComponent
+   */
+  public iniciaCampos(text: string){
+    setTimeout(function(t){
+      console.log('Dentro do timeout');
+      this.texto = text;
+      this.display = false;
+    }.bind(this), 1000);
   }
 
   /**
@@ -86,6 +118,7 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
               nota.titulo =  nota.titulo.substr(0,  nota.titulo.indexOf('/'));
             }
 
+            nota.titulo = nota.titulo.toLocaleLowerCase();
             nota.nota = this.texto.toString();
 
             // console.log(nota.titulo);
@@ -114,6 +147,11 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
       });
   }
 
+  /**
+   * Limpa a área de texto e o título da nota.
+   *
+   * @memberof AdicionaNotesComponent
+   */
   public limparTexto(){
     this.okDialogService
     .confirm('Confirmação...', 'Tem certeza que deseja limpar a nota?')
@@ -125,6 +163,12 @@ export class AdicionaNotesComponent implements OnInit, INoteCanDiactive  {
     });
   }
 
+    /**
+     * Verifica se a rota pode ser deixada.
+     *
+     * @returns {(Promise<boolean> | boolean)} - Retorna true ou false se pode ou não sair da rota.
+     * @memberof AdicionaNotesComponent
+     */
     public podeDesativar(): Promise<boolean> | boolean{
       console.log('Saindoooo do add');
       // Verifica se o campo está vazio, se estiver, sai.

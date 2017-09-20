@@ -1,3 +1,4 @@
+import { ContaComponent } from './conta/conta.component';
 import { AdicionaNotesComponent } from './adiciona-notes/adiciona-notes.component';
 import { ListaNotesComponent } from './lista-notes/lista-notes.component';
 import { AuthGuardService } from '../shared/guards/auth-guard.service';
@@ -10,8 +11,9 @@ const LOGIN_ROUTES: Routes = [
       children: [
         {path: 'lista', component: ListaNotesComponent},
         {path: 'adicionar', component: AdicionaNotesComponent, canDeactivate: [AuthGuardService]},
+        { path: 'conta', component: ContaComponent },
         {path: ':titulo/editar', component: AdicionaNotesComponent, canDeactivate: [AuthGuardService],
-        resolve: [AuthGuardService]},
+        /*resolve: [AuthGuardService]*/},
         { path: '', redirectTo: 'lista', pathMatch: 'full' }
     ]},
 

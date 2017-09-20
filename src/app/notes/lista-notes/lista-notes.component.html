@@ -1,5 +1,5 @@
 <div class="container lista">
-  <div class="row">
+  <div class="row" *ngIf="notasVazias">
     <div class="col s6 m6 l6 xl6">
       <input type="text" placeholder="Pesquisar" #pes (keyup)="filtraNotas(pes.value)">
     </div>
@@ -13,11 +13,12 @@
 
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="notasVazias">
     <ul class="collection" *ngFor="let item of listaNotas">
       <li class="collection-item avatar">
         <i class="material-icons circle purple">title</i>
-        <span class="title"><strong><a [routerLink]="['/notes', item.titulo, 'editar']">{{ item.titulo }}</a></strong></span>
+        <span class="title"><strong><a [routerLink]="['/notes', item.titulo, 'editar']" mdTooltip="Editar"
+          mdTooltipPosition="right">{{ item.titulo }}</a></strong></span>
         <p>{{ item.info.data }} <br> {{ item.info.hora }}
         </p>
         <a md-icon-button color="primary" class="secondary-content" (click)="deletaNota(item)" mdTooltip="Excluir nota" mdTooltipPosition="left">
@@ -25,6 +26,10 @@
         </a>
       </li>
     </ul>
+  </div>
+
+  <div class="row semNotas" *ngIf="!notasVazias">
+    <h4>Não há notas</h4>
   </div>
 
   <div class="meuBotao">

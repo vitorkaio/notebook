@@ -24,12 +24,31 @@ export class BarrasComponent implements OnInit {
   public ngOnInit() {
   }
 
+  /**
+   * Executa o logout do sistema.
+   *
+   * @memberof BarrasComponent
+   */
   public logout(){
     this.authService.doLogout();
   }
 
+  /**
+   * Vai para a rota notes
+   *
+   * @memberof BarrasComponent
+   */
   public notes(){
     this.auxiliarService.goRouteNotes();
+  }
+
+  /**
+   * Executa a deleção da conta.
+   *
+   * @memberof BarrasComponent
+   */
+  public conta(){
+    this.auxiliarService.goRouteConta();
   }
 
 }

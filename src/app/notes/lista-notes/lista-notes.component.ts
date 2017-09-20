@@ -24,6 +24,8 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
     {value: '2', viewValue: 'Título'}
   ];
 
+  public notasVazias: boolean = false;
+
   constructor(private firebaseService: FirebaseService, private auxiliarService: AuxiliarService,
   private okDialogService: OkService, private notasService: NotasService){}
 
@@ -32,12 +34,18 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
     this.auxiliarService.getUsuarioLogado().then(res => {
       this.usuario = this.auxiliarService.getUserFromEmail(res);
       this.firebaseService.getAllNotes(this.usuario).then(res => {
-        for (var key in res) {
+        if(res.length == 0)
+          this.notasVazias = false;
+        else
+          this.notasVazias = true;
+
+        this.listaNotas = res;
+        /*for (var key in res) {
           if (res.hasOwnProperty(key)) {
             this.listaNotas.push({'titulo': key, 'info': res[key]});
              //console.log(key, res[key]);
           }
-       }
+       }*/
        this.display = false;
        this.notasService.initNotas(this.listaNotas);
        this.listaFiltro = this.listaNotas;
@@ -60,7 +68,7 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
    * @memberof ListaNotesComponent
    */
   public deletaNota(nota){
-    this.openModalOkDialog(nota);
+      this.openModalOkDialog(nota);
   }
 
   /**
@@ -81,6 +89,14 @@ export class ListaNotesComponent implements OnInit, OnChanges, DoCheck {
              if(item.titulo == nota.titulo){
                this.listaNotas.splice(key, 1);
                this.listaFiltro = this.listaNotas;
+               // Verifica se a lista está vazia.
+                console.log(this.listaNotas.length);
+                if(this.listaNotas.length == 0){
+                  console.log('Lista vazia');
+                  this.notasVazias = false;
+                }
+                else
+                  this.notasVazias = true;
              }
             });
           }

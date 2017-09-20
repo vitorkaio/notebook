@@ -37,10 +37,20 @@ export class AuthGuardService implements CanActivate, CanDeactivate<INoteCanDiac
 
     return new Promise(resolve => {
       this.checkLogin().then(res => {
+
+        // Verifica se o usuário está cadastrado e autentica o mesmo.
         if (res != null) {
-          console.log("notes");
-          resolve(true);
-          return true;
+          // Verifica se o usuário confirmou o email.
+          console.log('Email - verify: ' + res['emailVerified']);
+          if(res['emailVerified']){
+            resolve(true);
+            return true;
+          }
+          else{
+            this.rota.navigate(['/verificaemail'])
+            resolve(false);
+            return false;
+          }
         }
         this.rota.navigate(["/login"]);
         resolve(false);
